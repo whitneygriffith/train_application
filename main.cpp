@@ -39,7 +39,7 @@ class TRAIN // train class as a linked list of cars
     void loadTrain(); // load train with initial cars
     void addCar_front(int);
     void addCar_end(int); // THIS IS CODE YOU MUST WRITE//
-    //~TRAIN();                   // destructor THIS IS CODE YOU MUST WRITE
+    ~TRAIN();                   // destructor THIS IS CODE YOU MUST WRITE
     void displayTrainInfo();
     CAR *firstCar;
 };
@@ -49,6 +49,22 @@ TRAIN::TRAIN()
     trainWeight = 0;
     firstCar = NULL;
 }
+
+TRAIN::~TRAIN()
+{
+    for ( int x = 11; x > 1; x--)
+    {
+        CAR *temp = firstCar->nextCar;
+        delete firstCar;
+        firstCar = temp;
+        this->displayTrainInfo();
+    }
+    cout << "Destructor was called" << endl;
+
+    system("pause");
+}
+
+
 int TRAIN::getWeight() // returns the train weight
 {
     return trainWeight;
@@ -93,6 +109,7 @@ void TRAIN::addCar_front(int cWeight) // add first car to train
     firstCar = new CAR;
     firstCar->nextCar = hold;
 }
+
 
 void TRAIN::displayTrainInfo()
 {
